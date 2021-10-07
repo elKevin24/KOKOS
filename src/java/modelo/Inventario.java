@@ -13,12 +13,12 @@ public class Inventario {
 
     public static LinkedList<BeanInventario> consultaInventario() throws SQLException {
         LinkedList<BeanInventario> inv = new LinkedList<>();
-        String sql = "SELECT A.id_inventario, B.prenda, C.marcas, D.talla, A.precio_costo, A.precio_venta, A.codigo, E.usuario, A.fecha, A.status FROM \n"
+        String sql = "SELECT A.id_inventario, B.prenda, C.marcas, D.talla, A.precio_costo, A.precio_venta, A.codigo, E.usuario, A.fecha, A.status, A.cantidad, A.descripcion FROM \n"
                 + "kokos.inventario A, kokos.prenda B, kokos.marcas C, kokos.tallas D, kokos.usuarios E\n"
                 + "where A.prenda = B.id_prenda\n"
                 + "AND  A.marca = C.id_marcas\n"
                 + "and A.talla = D.id_talla\n"
-                + "AND A.usuario_id = E.id_usuario";
+                + "AND A.usuario_id = E.id_usuario order by 1 DESC";
 
         try {
             Conexion c = new Conexion();
@@ -39,6 +39,8 @@ public class Inventario {
                         user.setUsuario_id(rs.getString(8));
                         user.setFecha(rs.getString(9));
                         user.setStatus(rs.getString(10));
+                        user.setNumero_Prenda(rs.getString(11));
+                        user.setDescripcion(rs.getString(12));
 
                         inv.add(user);
                     }
@@ -112,6 +114,8 @@ public class Inventario {
                         + "`precio_costo`,\n"
                         + "`precio_venta`,\n"
                         + "`codigo`,\n"
+                        + "`cantidad`,\n"
+                        + "`descripcion`,\n"
                         + "`usuario_id`)\n"
                         + "VALUES\n"
                         + "('" + inv.getPrenda() + "',\n"
@@ -119,7 +123,9 @@ public class Inventario {
                         + "'" + inv.getTalla() + "',\n"
                         + "'" + inv.getPrecio_costo() + "',\n"
                         + "'" + inv.getPrecio_venta() + "',\n"
-                        + "'" + inv.getCodigo() + "',\n"
+                        + "UPPER('" + inv.getCodigo() + "'),\n"
+                        + "'" + inv.getNumero_Prenda() + "',\n"
+                        + "UPPER('" + inv.getDescripcion() + "'),\n"
                         + "'" + inv.getUsuario_id() + "')";
 
                 st.execute(sql);
@@ -135,8 +141,8 @@ public class Inventario {
         return agregado;
     }
 
-    public static BeanPoliza Consultar(String id) {
-        BeanPoliza user = new BeanPoliza();
+    public static BeanInventario ConsultarUnique(String id) {
+        BeanInventario user = new BeanInventario();
         System.out.println("entrando a consultar");
 
         try {
@@ -144,14 +150,35 @@ public class Inventario {
             try (Connection con = c.getConexion()) {
                 Statement st;
                 st = con.createStatement();
-                try (ResultSet rs = st.executeQuery("SELECT * FROM kokos.poliza where id_poliza = " + id + " ")) {
+                try (ResultSet rs = st.executeQuery("SELECT \n"
+                        + "	IFNULL(`inventario`.`id_inventario`,' ') id_inventario,\n"
+                        + "    IFNULL(`inventario`.`prenda`,' ') prenda,\n"
+                        + "    IFNULL(`inventario`.`marca`,' ') marca,\n"
+                        + "    IFNULL(`inventario`.`talla`,' ') talla,\n"
+                        + "    IFNULL(`inventario`.`cantidad`,' ') cantidad,\n"
+                        + "    IFNULL(`inventario`.`descripcion`, ' ') descripcion,\n"
+                        + "    IFNULL(`inventario`.`precio_costo`,' ') precio_costo,\n"
+                        + "    IFNULL(`inventario`.`precio_venta`,' ') precio_venta,\n"
+                        + "    IFNULL(`inventario`.`usuario_id`,' ') usuario_id,\n"
+                        + "    IFNULL(`inventario`.`fecha`,' ') fecha,\n"
+                        + "    IFNULL(`inventario`.`status`,' ') estatus,\n"
+                        + "    IFNULL(`inventario`.`codigo`,' ') codigo\n"
+                        + "    \n"
+                        + "FROM `kokos`.`inventario` where id_inventario = " + id + " ")) {
                     while (rs.next()) {
 
-                        user.setNumero_poliza(rs.getString("numero_poliza"));
-                        user.setReferencia(rs.getString("referencia"));
-                        user.setDescripcion(rs.getString("descripcion"));
-                        user.setTotal_prendas(rs.getString("total_prendas"));
-                        user.setPrendas_dañadas(rs.getString("prendas_dañadas"));
+                        user.setId_inventario(rs.getString(1));
+                        user.setPrenda(rs.getString(2));
+                        user.setMarca(rs.getString(3));
+                        user.setTalla(rs.getString(4));
+                        user.setNumero_Prenda(rs.getString(5));
+                        user.setDescripcion(rs.getString(6));
+                        user.setPrecio_costo(rs.getString(7));
+                        user.setPrecio_venta(rs.getString(8));
+                        user.setUsuario_id(rs.getString(9));
+                        user.setFecha(rs.getString(10));
+                        user.setStatus(rs.getString(11));
+                        user.setCodigo(rs.getString(12));
                     }
                 }
                 st.close();
@@ -190,7 +217,7 @@ public class Inventario {
         return actualizado;
     }
 
-    public static String Editar(BeanPoliza poliza, String id) {
+    public static String Editar(BeanInventario poliza, String id) {
         String result = null;
         String sql = null;
         try {
@@ -200,13 +227,19 @@ public class Inventario {
                 Statement st;
                 st = con.createStatement();
 
-                sql = "UPDATE `kokos`.`poliza` SET\n"
-                        + "`numero_poliza` = '" + poliza.getNumero_poliza() + "',\n"
-                        + "`referencia` = '" + poliza.getReferencia() + "',\n"
-                        + "`descripcion` = '" + poliza.getDescripcion() + "',\n"
-                        + "`total_prendas` = " + poliza.getTotal_prendas() + ",\n"
-                        + "`prendas_dañadas` = " + poliza.getPrendas_dañadas() + "\n"
-                        + "WHERE `id_poliza` = " + id + "";
+                sql = "UPDATE `kokos`.`inventario` SET\n"
+                        
+                        + "`prenda` = '" + poliza.getPrenda()+ "',\n"
+                        + "`marca` = '" + poliza.getMarca()+ "',\n"
+                        + "`talla` = " + poliza.getTalla()+ ",\n"
+                        + "`cantidad` = " + poliza.getNumero_Prenda()+ ",\n"
+                        + "`descripcion` = '" + poliza.getDescripcion()+ "',\n"
+                        + "`precio_costo` = " + poliza.getPrecio_costo()+ ",\n"
+                        + "`precio_venta` = " + poliza.getPrecio_venta()+ ",\n"
+                        + "`usuario_id` = " + poliza.getUsuario_id()+ ",\n"
+                        + "`fecha` = now(),\n"
+                        + "`codigo` = '" + poliza.getCodigo()+ "'\n"
+                        + "WHERE `id_inventario` = " + id + "";
 
                 st.execute(sql);
                 result = "ok";

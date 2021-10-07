@@ -54,34 +54,33 @@ public class ServletArticulos extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
 
-        String Prenda;
-        String Talla;
-        String Marca;
-        String precio_costo;
-        String precio_venta;
-        String codigo;
-        String usuario;
+        String Prenda = request.getParameter("Prenda");
+        String Talla = request.getParameter("Talla");
+        String Marca = request.getParameter("Marca");
+        String precio_costo = request.getParameter("precio_costo");
+        String precio_venta = request.getParameter("precio_venta");
+        String codigo = request.getParameter("codigo");
+        String usuario = request.getParameter("usuario");
+        String Numero_Prenda = request.getParameter("Numero_Prenda");
+        String descripcion = request.getParameter("descripcion");
+        BeanInventario p;
+        String pol;
 
         String param = request.getParameter("param");
 
         if (param.equalsIgnoreCase("1")) {
             System.err.println("Guardar");
-            Prenda = request.getParameter("Prenda");
-            Talla = request.getParameter("Talla");
-            Marca = request.getParameter("Marca");
-            precio_costo = request.getParameter("precio_costo");
-            precio_venta = request.getParameter("precio_venta");
-            codigo = request.getParameter("codigo");
-            usuario = request.getParameter("usuario");
+            
+            
 
             out.println(param + Prenda + Talla + Marca + precio_costo + precio_venta + codigo + usuario);
 
-            BeanInventario p = new BeanInventario(Prenda, Talla, Marca, precio_costo, precio_venta, codigo, usuario);
-            String pol = Inventario.agregar(p);
+             p = new BeanInventario(Prenda,Marca, Talla,  precio_costo, precio_venta, codigo, usuario, Numero_Prenda, descripcion);
+             pol = Inventario.agregar(p);
 
             if (pol.equalsIgnoreCase("bien")) {
                 System.out.println("Se inserto");
-                response.sendRedirect("Agregar_Poliza.jsp");
+                response.sendRedirect("Consultar_Inventario.jsp");
 
             } else {
                 System.err.println("No se inserto");
@@ -90,6 +89,17 @@ public class ServletArticulos extends HttpServlet {
         }
         if (param.equalsIgnoreCase("2")) {
             System.err.println("Editar");
+            String id = request.getParameter("id");
+            p = new BeanInventario(Prenda,Marca, Talla,  precio_costo, precio_venta, codigo, usuario, Numero_Prenda, descripcion);
+            pol = Inventario.Editar(p, id);
+            
+            if (pol.equalsIgnoreCase("ok")) {
+                System.out.println("Se inserto");
+                response.sendRedirect("Consultar_Inventario.jsp");
+
+            } else {
+                System.err.println("No se inserto");
+            }
 
         }
         if (param.equalsIgnoreCase("3")) {

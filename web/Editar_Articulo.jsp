@@ -9,6 +9,8 @@
 <%@page import="modelo.Tipo_Prenda"%>
 <%@page import="controlador.BeanPrenda"%>
 <%@page import="java.util.LinkedList"%>
+<%@page import="modelo.Inventario"%>
+<%@page import="controlador.BeanInventario"%>
 <%@page import="modelo.Poliza"%>
 <%@page import="controlador.BeanPoliza"%>
 <%@page import="controlador.persona"%>
@@ -24,9 +26,30 @@
 
     persona per = new persona();
     per = Usuario.Consultar(user);
+    
+    System.err.println("usuario: "+ per.getId_login());
 
+    String id_poliza = request.getParameter("id");
+
+    BeanInventario pol = new BeanInventario();
+    pol = Inventario.ConsultarUnique(id_poliza);
 
 %>
+
+<script>
+		window.onload=function() {
+			var txtFiltro = $("#Prenda").val();
+            $.ajax({
+                url: "busca.do",
+                data: {
+                    filtro: txtFiltro
+                },
+                success: function (result) {
+                    $("#Talla").html(result);
+                }
+            });
+		}
+		</script>
 <div class="content-inner">
     <!-- Page Header-->
     <header class="page-header">
@@ -46,10 +69,12 @@
                     <option selected>Seleccione Tipo de Prenda</option>
 
                     <%                        LinkedList<BeanPrenda> lista = Tipo_Prenda.consultaTipo_Prenda();
-
                         for (int i = 0; i < lista.size(); i++) {
 
-                            //2
+                            if (lista.get(i).getId().equals(pol.getPrenda())) {
+                                System.err.println("prenda");
+                                out.println("<option value='" + lista.get(i).getId() + "' selected>" + lista.get(i).getName() + "</option>");
+                            }
                             out.println("<option value='" + lista.get(i).getId() + "'>" + lista.get(i).getName() + "</option>");
 
                         }
@@ -71,11 +96,17 @@
                 <label for="Marca" class="form-label">Marca</label>
                 <select id="Marca" name="Marca" class="form-select" required>
                     <option selected>Seleccione Marca</option>
-                    <%                        LinkedList<BeanMarcas> lista1 = Marcas.consulta();
+                    <%                        
+                        
+                        
+                        LinkedList<BeanMarcas> lista1 = Marcas.consulta();
 
                         for (int i = 0; i < lista1.size(); i++) {
 
-                            //2
+                            if (lista1.get(i).getId().equals(pol.getMarca())) {
+                                System.err.println("prenda");
+                                out.println("<option value='" + lista1.get(i).getId() + "' selected>" + lista1.get(i).getNombre() + "</option>");
+                            }
                             out.println("<option value='" + lista1.get(i).getId() + "'>" + lista1.get(i).getNombre() + "</option>");
 
                         }
@@ -87,30 +118,31 @@
 
             <div class="col-md-3">
                 <label for="Numero_Prenda" class="form-label">Cantidad de Prendas</label>
-                <input type="number" class="form-control" id="Numero_Prenda" name="Numero_Prenda" required >
+                <input type="number" class="form-control" id="Numero_Prenda" name="Numero_Prenda" required value="<%= pol.getNumero_Prenda()%>">
             </div>
             <div class="col-md-3">
                 <label for="precio_costo" class="form-label">Precio Costo</label>
-                <input type="number" class="form-control" id="precio_costo" name="precio_costo" required >
+                <input type="number" class="form-control" id="precio_costo" name="precio_costo" required value="<%= pol.getPrecio_costo()%>">
             </div>
             <div class="col-md-3">
                 <label for="precio_venta" class="form-label">Precio Venta</label>
-                <input type="number" class="form-control" id="precio_venta" name="precio_venta" required>
+                <input type="number" class="form-control" id="precio_venta" name="precio_venta" required value="<%= pol.getPrecio_venta()%>">
             </div>
 
             <div class="col-md-3">
                 <label for="codigo" class="form-label">Codigo de Prenda</label>
-                <input type="text" class="form-control" id="codigo" name="codigo" maxlength="45" required>
+                <input type="text" class="form-control" id="codigo" name="codigo" maxlength="45" required value="<%= pol.getCodigo()%>">
             </div>
             <div class="col-md-6">
                 <label for="descripcion" class="form-label">Descripcion</label>
-                <input type="text" class="form-control" id="descripcion" name="descripcion" maxlength="500" required>
+                <input type="text" class="form-control" id="descripcion" name="descripcion" maxlength="500" required value="<%= pol.getDescripcion()%>">
             </div>
             <div class="col-md-12">
                 </br>
             </div>
             <input  type="hidden" value="<%= per.getId_login()%>" name="usuario" required>
-            <input  type="hidden" value="1" name="param">
+            <input  type="hidden" value="<%= id_poliza %>" name="id">
+            <input  type="hidden" value="2" name="param">
             <div class="col-auto">
 
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -124,19 +156,20 @@
 
 
         function myFunction() {
-            var x = document.getElementById("Prenda").value;
+
             var txtFiltro = $("#Prenda").val();
             $.ajax({
                 url: "busca.do",
                 data: {
-                    filtro: txtFiltro,
-
+                    filtro: txtFiltro
                 },
                 success: function (result) {
                     $("#Talla").html(result);
                 }
             });
         }
+
+        
 
     </script>
     <jsp:include page="Foot.jsp" flush="true"></jsp:include>

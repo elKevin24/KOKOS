@@ -19,9 +19,6 @@
 
             <!--Let browser know website is optimized for mobile-->
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-
-
         </head>
         <body>
             <div class="container">
@@ -61,7 +58,7 @@
                             out.println("<td id='prueba'>" + lista.get(i).getFecha() + "</td>");
                             out.println("<td id='prueba'>" + lista.get(i).getUsuario_id() + "</td>");
                             out.println("<td>" + "<a class='btn btn-warning' href=Editar_Poliza.jsp?id=" + lista.get(i).getId_poliza() + ">" + "Editar" + "</a>" + "</td>");
-                            out.println("<td><form  method='post' action='ServletPoliza'><input  type='hidden' value='3' name='param'><input  type='hidden' value='" + lista.get(i).getId_poliza() + "' name='id'><button type='submit' class='btn btn-danger'>Success</button></form></td>");
+                            out.println("<td><form  method='post' action='ServletPoliza'><input  type='hidden' value='3' name='param'><input  type='hidden' value='" + lista.get(i).getId_poliza() + "' name='id'><button type='submit' class='btn btn-danger'>Eliminar</button></form></td>");
 
                             // <input  type="hidden" value="1" name="param">
                             // out.println("<td> <a class='btn-floating btn-small waves-effect waves-light green'></a></td>");

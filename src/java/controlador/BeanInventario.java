@@ -82,8 +82,26 @@ public class BeanInventario {
         this.status = status;
     }
 
+    public String getNumero_Prenda() {
+        return Numero_Prenda;
+    }
+
+    public void setNumero_Prenda(String Numero_Prenda) {
+        this.Numero_Prenda = Numero_Prenda;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
+    
+
     public BeanInventario(String prenda, String marca,
-            String talla, String precio_costo, String precio_venta, String codigo, String usuario_id) {
+            String talla, String precio_costo, String precio_venta, String codigo, String usuario_id, String Numero_Prenda, String descripcion) {
 
         this.prenda = prenda;
         this.marca = marca;
@@ -92,6 +110,8 @@ public class BeanInventario {
         this.precio_venta = precio_venta;
         this.codigo = codigo;
         this.usuario_id = usuario_id;
+        this.Numero_Prenda = Numero_Prenda;
+        this.descripcion = descripcion;
 
     }
 
@@ -105,6 +125,8 @@ public class BeanInventario {
     private String usuario_id;
     private String fecha;
     private String status;
+    private String Numero_Prenda;
+    private String descripcion;
 
     public BeanInventario() {
     }

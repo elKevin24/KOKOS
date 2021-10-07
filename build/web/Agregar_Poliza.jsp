@@ -10,16 +10,23 @@
 
 <jsp:include page="Head.jsp" flush="true"></jsp:include>
     <!--<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
-    
-    <%
-            
-        String user  = String.valueOf(session.getAttribute("usuario"));
-        
-        persona per = new persona();
-        per = Usuario.Consultar(user);
-        
-        
-            %>
+
+<%
+
+    String user = String.valueOf(session.getAttribute("usuario"));
+
+    persona per = new persona();
+    per = Usuario.Consultar(user);
+
+
+%>
+<div class="content-inner">
+    <!-- Page Header-->
+    <header class="page-header">
+        <div class="container-fluid">
+            <h2 class="no-margin-bottom">Agregar Poliza</h2>
+        </div>
+    </header>
     <div class="container">
         <form class="row g-3" action="ServletPoliza" method="post" autocomplete="off">
             <div class="col-md-6">
@@ -42,18 +49,18 @@
                 <label for="prendas_danadas" class="form-label">Prendas Dañadas</label>
                 <input type="number" class="form-control" id="prendas_dañadas" name="prendas_danadas">
             </div>
-           <div class="col-md-12">
-               </br>
-               </div>
-            <input  type="hidden" value="<%= per.getId_login() %>" name="usuario">
+            <div class="col-md-12">
+                </br>
+            </div>
+            <input  type="hidden" value="<%= per.getId_login()%>" name="usuario">
             <input  type="hidden" value="1" name="param">
-              <div class="col-auto">
-                  
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </div>
-            
+            <div class="col-auto">
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
         </form>
     </div>
-<jsp:include page="Foot.jsp" flush="true"></jsp:include>
+    <jsp:include page="Foot.jsp" flush="true"></jsp:include>
 
-<!--<script src="js/bootstrap.min.js" type="text/javascript"></script>-->
+    <!--<script src="js/bootstrap.min.js" type="text/javascript"></script>-->

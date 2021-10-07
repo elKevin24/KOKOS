@@ -27,103 +27,118 @@
 
 
 %>
-<div class="container">
-    <form class="row g-3" action="ServletArticulos" method="post" autocomplete="off">
-        <div class="col-md-12">
-            </br>
-
+<div class="content-inner">
+    <!-- Page Header-->
+    <header class="page-header">
+        <div class="container-fluid">
+            <h2 class="no-margin-bottom">Agregar Articulo a Inventario</h2>
         </div>
-        <div class="col-md-4">
-            <label for="Prenda" class="form-label">Prenda</label>
-            <select id="Prenda" name="Prenda" class="form-select" required>
-                <option selected>Seleccione Tipo de Prenda</option>
+    </header>
+    <div class="container">
+        <form class="row g-3" action="ServletArticulos" method="post" autocomplete="off">
+            <div class="col-md-12">
+                </br>
 
-                <%                     LinkedList<BeanPrenda> lista = Tipo_Prenda.consultaTipo_Prenda();
+            </div>
+            <div class="col-md-4">
+                <label for="Prenda" class="form-label">Prenda</label>
+                <select id="Prenda" name="Prenda" class="form-select" required>
+                    <option selected>Seleccione Tipo de Prenda</option>
 
-                    for (int i = 0; i < lista.size(); i++) {
+                    <%                        LinkedList<BeanPrenda> lista = Tipo_Prenda.consultaTipo_Prenda();
 
-                        //2
-                        out.println("<option value='" + lista.get(i).getId() + "'>" + lista.get(i).getName() + "</option>");
+                        for (int i = 0; i < lista.size(); i++) {
 
-                    }
+                            //2
+                            out.println("<option value='" + lista.get(i).getId() + "'>" + lista.get(i).getName() + "</option>");
 
-
-                %>  
-
-            </select>
-        </div>
-        <div class="col-md-4">
-            <label for="Talla" class="form-label">Talla</label>
-            <select id="Talla" name="Talla" class="form-select" required>
-                <option selected>Seleccione Talla</option>
-
-            </select>
-        </div>
-
-        <div class="col-md-4">
-            <label for="Marca" class="form-label">Marca</label>
-            <select id="Marca" name="Marca" class="form-select" required>
-                <option selected>Seleccione Marca</option>
-                <%                    
-                    LinkedList<BeanMarcas> lista1 = Marcas.consulta();
-
-                    for (int i = 0; i < lista1.size(); i++) {
-
-                        //2
-                        out.println("<option value='" + lista1.get(i).getId() + "'>" + lista1.get(i).getNombre()+ "</option>");
-
-                    }
+                        }
 
 
-                %> 
-            </select>
-        </div>
-        <div class="col-md-4">
-            <label for="precio_costo" class="form-label">Precio Costo</label>
-            <input type="number" class="form-control" id="precio_costo" name="precio_costo" required >
-        </div>
-        <div class="col-md-4">
-            <label for="precio_venta" class="form-label">Precio Venta</label>
-            <input type="number" class="form-control" id="precio_venta" name="precio_venta" required>
-        </div>
+                    %>  
 
-        <div class="col-md-4">
-            <label for="codigo" class="form-label">Codigo de Prenda</label>
-            <input type="text" class="form-control" id="codigo" name="codigo" required>
-        </div>
-        <div class="col-md-12">
-            </br>
-        </div>
-        <input  type="hidden" value="<%= per.getId_login()%>" name="usuario" required>
-        <input  type="hidden" value="1" name="param">
-        <div class="col-auto">
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="Talla" class="form-label">Talla</label>
+                <select id="Talla" name="Talla" class="form-select" required>
+                    <option selected>Seleccione Talla</option>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+                </select>
+            </div>
 
-    </form>
-</div>
-<script>
+            <div class="col-md-4">
+                <label for="Marca" class="form-label">Marca</label>
+                <select id="Marca" name="Marca" class="form-select" required>
+                    <option selected>Seleccione Marca</option>
+                    <%                        LinkedList<BeanMarcas> lista1 = Marcas.consulta();
 
-    document.getElementById("Prenda").addEventListener("change", myFunction);
+                        for (int i = 0; i < lista1.size(); i++) {
+
+                            //2
+                            out.println("<option value='" + lista1.get(i).getId() + "'>" + lista1.get(i).getNombre() + "</option>");
+
+                        }
 
 
-    function myFunction() {
-        var x = document.getElementById("Prenda").value;
-        var txtFiltro = $("#Prenda").val();
-        $.ajax({
-            url: "busca.do",
-            data: {
-                filtro: txtFiltro,
+                    %> 
+                </select>
+            </div>
 
-            },
-            success: function (result) {
-                $("#Talla").html(result);
-            }
-        });
-    }
+            <div class="col-md-3">
+                <label for="Numero_Prenda" class="form-label">Cantidad de Prendas</label>
+                <input type="number" class="form-control" id="Numero_Prenda" name="Numero_Prenda" required >
+            </div>
+            <div class="col-md-3">
+                <label for="precio_costo" class="form-label">Precio Costo</label>
+                <input type="number" class="form-control" id="precio_costo" name="precio_costo" required >
+            </div>
+            <div class="col-md-3">
+                <label for="precio_venta" class="form-label">Precio Venta</label>
+                <input type="number" class="form-control" id="precio_venta" name="precio_venta" required>
+            </div>
 
-</script>
-<jsp:include page="Foot.jsp" flush="true"></jsp:include>
+            <div class="col-md-3">
+                <label for="codigo" class="form-label">Codigo de Prenda</label>
+                <input type="text" class="form-control" id="codigo" name="codigo" maxlength="45" required>
+            </div>
+            <div class="col-md-6">
+                <label for="descripcion" class="form-label">Descripcion</label>
+                <input type="text" class="form-control" id="descripcion" name="descripcion" maxlength="500" required>
+            </div>
+            <div class="col-md-12">
+                </br>
+            </div>
+            <input  type="hidden" value="<%= per.getId_login()%>" name="usuario" required>
+            <input  type="hidden" value="1" name="param">
+            <div class="col-auto">
 
-<!--<script src="js/bootstrap.min.js" type="text/javascript"></script>-->
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
+        </form>
+    </div>
+    <script>
+
+        document.getElementById("Prenda").addEventListener("change", myFunction);
+
+
+        function myFunction() {
+            var x = document.getElementById("Prenda").value;
+            var txtFiltro = $("#Prenda").val();
+            $.ajax({
+                url: "busca.do",
+                data: {
+                    filtro: txtFiltro,
+
+                },
+                success: function (result) {
+                    $("#Talla").html(result);
+                }
+            });
+        }
+
+    </script>
+    <jsp:include page="Foot.jsp" flush="true"></jsp:include>
+
+    <!--<script src="js/bootstrap.min.js" type="text/javascript"></script>-->
