@@ -57,7 +57,7 @@ public class Inventario {
 
     public static LinkedList<BeanInventario> consultaInventario(String filtro) throws SQLException {
         LinkedList<BeanInventario> inv = new LinkedList<>();
-        String sql = "SELECT A.id_inventario, B.prenda, C.marcas, D.talla, A.precio_costo, A.precio_venta, A.codigo FROM \n"
+        String sql = "SELECT A.id_inventario, B.prenda, C.marcas, D.talla, A.precio_costo, A.precio_venta, A.codigo, A.cantidad, A.descripcion FROM \n"
                 + "kokos.inventario A, kokos.prenda B, kokos.marcas C, kokos.tallas D, kokos.usuarios E\n"
                 + "where A.prenda = B.id_prenda\n"
                 + "AND A.marca = C.id_marcas\n"
@@ -82,6 +82,8 @@ public class Inventario {
                         user.setPrecio_costo(rs.getString(5));
                         user.setPrecio_venta(rs.getString(6));
                         user.setCodigo(rs.getString(7));
+                        user.setNumero_Prenda(rs.getString(7));
+                        user.setDescripcion(rs.getString(7));
 
                         inv.add(user);
                     }

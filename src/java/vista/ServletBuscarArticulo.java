@@ -7,7 +7,6 @@ package vista;
 
 
 import controlador.BeanInventario;
-import controlador.BeanTalla;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -17,7 +16,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Inventario;
-import modelo.Talla;
 
 /**
  *
@@ -51,7 +49,7 @@ public class ServletBuscarArticulo extends HttpServlet {
 
                     
                     //out.println("<li> Ubicacion: " + p.getUbicacion() + ", Encargada: " + p.getEncargada()+" </li>");
-                    out.println("<li onclick='myFunction2(\"" + p.getCodigo()+ "\", \"" + p.getId_inventario()+ "\", \"" + p.getPrenda()+ "\", \"" + p.getMarca()+ "\", \"" + p.getTalla()+ "\")'>" + p.getCodigo()+ "</li>");
+                    out.println("<li onclick='myFunction2(\"" + p.getCodigo()+ "\", \"" + p.getId_inventario()+ "\", \"" + p.getPrenda()+ "\", \"" + p.getMarca()+ "\", \"" + p.getTalla()+ "\", \"" + p.getNumero_Prenda()+ "\", \"" + p.getDescripcion()+ "\")'>" + p.getCodigo()+ "</li>");
                       
                      
                 }

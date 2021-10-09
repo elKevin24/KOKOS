@@ -36,11 +36,11 @@
 
         </div>
         <div class="col-md-4">
-            <label for="Tienda" class="form-label">Tienda</label>
-            <select id="Tienda" name="Tienda" class="form-select col-md-8" aria-label="Default select example" required>
-                <option selected>Seleccione Tienda</option>
+            <label for="Tienda" class="form-label">Seleccione Tienda</label>
+            <select id="Tienda" name="Tienda" required>
+                
 
-                <%                     LinkedList<BeanTienda> lista = Tienda.consulta_tienda();
+                <%                    LinkedList<BeanTienda> lista = Tienda.consulta_tienda();
 
                     for (int i = 0; i < lista.size(); i++) {
 
@@ -70,11 +70,12 @@
                 <thead class="thead">
                     <tr class="center">
                         <th>CODIGO</th>
+                        <th>CANTIDAD</th>
                         <th>PRENDA</th>
                         <th>MARCA</th>                            
                         <th>TALLA</th>
-                        
-                        
+
+
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -105,23 +106,25 @@
 
 <script>
     var a = 0;
-     var lastChar;
+    var lastChar;
     function agregarFila() {
         a++;
         document.getElementById("tablaprueba").insertRow(-1).innerHTML = `<td>
-                <input type="text" id="CODIGO`+a+`" class="form-control" placeholder="CODIGO PRENDA" aria-label="CODIGO PRENDA"   onkeyup="buscar_nav(this.value,this.id)" aria-describedby="addon-wrapping" name="NAVIERA_SERVICIOS_CARGA">
-                                        <input type="hidden" id="codigo_nav`+a+`" name="codigo_nav`+a+`">
-                                        <div id="busca_nav_resultado`+a+`" class="z"></div></div></td>
-<td id="Prenda`+a+`"></td>
-<td id="Marca`+a+`"></td>
-<td id="Talla`+a+`"></td>`;
+                <input type="text" id="CODIGO` + a + `" class="form-control" placeholder="CODIGO PRENDA" aria-label="CODIGO PRENDA"   onkeyup="buscar_nav(this.value,this.id)" aria-describedby="addon-wrapping" name="CODIGO` + a + `">
+                                        <input type="hidden" id="codigo_nav` + a + `" name="codigo_nav` + a + `">
+                                        <div id="busca_nav_resultado` + a + `" class="z"></div></div></td>
+
+<td id="Cantidad Prenda` + a + `"><input type="number" id="Cantidad` + a + `" class="form-control" placeholder="Cantidad Prendas" aria-label="Cantidad Prendas"  aria-describedby="addon-wrapping" name="Cantidad` + a + `"></td>
+<td id="Prenda` + a + `"></td>
+<td id="Marca` + a + `"></td>
+<td id="Talla` + a + `"></td>`;
         document.getElementById("cont").value = a;
 
 
     }
 
     function eliminarFila() {
-        
+
         a--;
         document.getElementById("cont").value = a;
         var table = document.getElementById("tablaprueba");
@@ -139,12 +142,12 @@
 
     function buscar_nav(valor, valor1) {
         //lo que el usuario escribio
-        
-         //lastChar = valor1[valor1.length -1];
-        lastChar = valor1.replace(/\D/g,'');
-         
-         
-       
+
+        //lastChar = valor1[valor1.length -1];
+        lastChar = valor1.replace(/\D/g, '');
+
+
+
         var txtFiltro = valor;
         $.ajax({
             url: "buscaArticulo.do",
@@ -153,7 +156,7 @@
 
             },
             success: function (result) {
-                $("#busca_nav_resultado"+lastChar+"").html(result);
+                $("#busca_nav_resultado" + lastChar + "").html(result);
             }
         });
     }
@@ -162,13 +165,13 @@
     function myFunction2(valor, valor2, valor3, valor4, valor5) {
 
 
-
-        document.getElementById("CODIGO"+lastChar+"").value = valor;
-        document.getElementById("codigo_nav"+lastChar+"").value = valor2;
-        document.getElementById("Prenda"+lastChar+"").innerHTML = valor3;
-        document.getElementById("Marca"+lastChar+"").innerHTML = valor4;
-        document.getElementById("Talla"+lastChar+"").innerHTML = valor5;
-        document.getElementById("busca_nav_resultado"+lastChar+"").innerHTML = " ";
+        cons
+        document.getElementById("CODIGO" + lastChar + "").value = valor;
+        document.getElementById("codigo_nav" + lastChar + "").value = valor2;
+        document.getElementById("Prenda" + lastChar + "").innerHTML = valor3;
+        document.getElementById("Marca" + lastChar + "").innerHTML = valor4;
+        document.getElementById("Talla" + lastChar + "").innerHTML = valor5;
+        document.getElementById("busca_nav_resultado" + lastChar + "").innerHTML = " ";
     }
 
     document.getElementById("Tienda").addEventListener("change", myFunction);

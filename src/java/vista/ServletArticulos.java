@@ -59,10 +59,10 @@ public class ServletArticulos extends HttpServlet {
         String Marca = request.getParameter("Marca");
         String precio_costo = request.getParameter("precio_costo");
         String precio_venta = request.getParameter("precio_venta");
-        String codigo = request.getParameter("codigo");
+        String codigo = request.getParameter("codigo").toUpperCase();
         String usuario = request.getParameter("usuario");
         String Numero_Prenda = request.getParameter("Numero_Prenda");
-        String descripcion = request.getParameter("descripcion");
+        String descripcion = request.getParameter("descripcion").toUpperCase();
         BeanInventario p;
         String pol;
 
