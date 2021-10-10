@@ -42,16 +42,22 @@ public class BeanDetalleEnvio {
         this.id_envio = id_envio;
     }
 
+    public String getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(String cantidad) {
+        this.cantidad = cantidad;
+    }
     
 
-    
-
-    public BeanDetalleEnvio(int id_detalle, String inventario_id
+    public BeanDetalleEnvio(int id_detalle, String inventario_id, String cantidad
             ) {
 
         
         this.id_detalle = id_detalle;        
         this.inventario_id = inventario_id;
+        this.cantidad = cantidad;
        
 
     }
@@ -61,6 +67,7 @@ public class BeanDetalleEnvio {
     private String fecha;
     private String status;
     private String id_envio;
+    private String cantidad;
 
     public BeanDetalleEnvio() {
     }

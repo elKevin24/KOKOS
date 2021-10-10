@@ -18,7 +18,7 @@ public class Inventario {
                 + "where A.prenda = B.id_prenda\n"
                 + "AND  A.marca = C.id_marcas\n"
                 + "and A.talla = D.id_talla\n"
-                + "AND A.usuario_id = E.id_usuario order by 1 DESC";
+                + "AND A.usuario_id = E.id_usuario and A.status = 1  order by 1 DESC";
 
         try {
             Conexion c = new Conexion();
@@ -63,6 +63,7 @@ public class Inventario {
                 + "AND A.marca = C.id_marcas\n"
                 + "and A.talla = D.id_talla\n"
                 + "AND A.usuario_id = E.id_usuario\n"
+                + "AND A.status = 1\n"
                 + "AND CONCAT(A.codigo , C.marcas) LIKE  '%" + filtro + "%'";
 
         //String sql = "SELECT CODIGO, NOMBRE FROM FINANCIERO.ASFT_USUARIOS_DE_SERVICIOS WHERE CO_TDU_CODIGO = 1 AND CODIGO||' '||NOMBRE  LIKE '%" + filtro + "%' ";
@@ -82,8 +83,8 @@ public class Inventario {
                         user.setPrecio_costo(rs.getString(5));
                         user.setPrecio_venta(rs.getString(6));
                         user.setCodigo(rs.getString(7));
-                        user.setNumero_Prenda(rs.getString(7));
-                        user.setDescripcion(rs.getString(7));
+                        user.setNumero_Prenda(rs.getString(8));
+                        user.setDescripcion(rs.getString(9));
 
                         inv.add(user);
                     }
@@ -193,7 +194,7 @@ public class Inventario {
 
     }
 
-    public static boolean Eliminar(int id) {
+    public static boolean Eliminar(String id) {
         boolean actualizado = false;
 
         try {
@@ -203,7 +204,7 @@ public class Inventario {
                 Statement st;
                 st = con.createStatement();
                 //UNA COMA ME HIZO DESVELARME HASTA LAS DOS DE LA MAÑANA
-                String sql = "UPDATE `kokos`.`poliza` SET `status` = 2 WHERE `id_poliza` = " + id + "";
+                String sql = "UPDATE `kokos`.`inventario` SET `status` = 2 WHERE `id_inventario` = " + id + "";
                 //"update tbl_seccion set grado ='"+usuario.getGrado()+"', seccion='"+usuario.getSeccion()+"', Id_nivel='"+usuario.getId_nivel()+"' where Id_seccion="+usuario.getId_seccion()+"";
 
                 st.execute(sql);

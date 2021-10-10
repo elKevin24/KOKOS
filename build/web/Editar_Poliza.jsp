@@ -27,6 +27,12 @@
     pol = Poliza.Consultar(id_poliza);
         
             %>
+            <div class="content-inner">
+            <header class="page-header">
+        <div class="container-fluid">
+            <h2 class="no-margin-bottom">Editar Poliza</h2>
+        </div>
+    </header>
     <div class="container">
         <form class="row g-3" action="ServletPoliza" method="post" autocomplete="off">
             <div class="col-md-6">
@@ -45,9 +51,42 @@
                 <label for="total_prendas" class="form-label">Total Prendas</label>
                 <input type="number" class="form-control" id="total_prendas" name="total_prendas" value="<%= pol.getTotal_prendas()%>">
             </div>
-            <div class="col-md-6">
-                <label for="prendas_danadas" class="form-label">Prendas Dañadas</label>
-                <input type="number" class="form-control" id="prendas_dañadas" name="prendas_danadas" value="<%= pol.getPrendas_dañadas()%>">
+            <div class="col-3">
+                <label for="Pais" class="form-label">Pais</label>
+                <input type="text" class="form-control" id="Pais" name="Pais" required value="<%= pol.getPais()%>">
+            </div>
+            <div class="col-9">
+                <label for="descripcion" class="form-label">Descripcion</label>
+                <input type="text" class="form-control" id="descripcion" name="descripcion" required value="<%= pol.getDescripcion()%>">
+            </div>
+            
+            <div class="col-3">
+                <label for="impuestopoliza" class="form-label">Impuesto Poliza</label>
+                <input type="number" class="form-control" id="impuestopoliza" name="impuestopoliza" min="0" required value="<%= pol.getImpuestopoliza()%>">
+            </div>
+            <div class="col-3">
+                <label for="almacenaje" class="form-label">Almacenaje</label>
+                <input type="number" class="form-control" id="almacenaje" name="almacenaje" min="0" required value="<%= pol.getAlmacenaje()%>">
+            </div>
+            <div class="col-3">
+                <label for="gestoraduanero" class="form-label">Gestor Aduanero</label>
+                <input type="number" class="form-control" id="gestoraduanero" name="gestoraduanero" min="0" required value="<%= pol.getGestoraduanero()%>">
+            </div>
+            <div class="col-3">
+                <label for="fleteaereo" class="form-label">Flete Aereo</label>
+                <input type="number" class="form-control" id="fleteaereo" name="fleteaereo" min="0" required value="<%= pol.getFleteaereo()%>"> 
+            </div>
+            <div class="col-4">
+                <label for="tramitador" class="form-label">Tramitador</label>
+                <input type="number" class="form-control" id="tramitador" name="tramitador" min="0" required value="<%= pol.getTramitador()%>"> 
+            </div>
+            <div class="col-4">
+                <label for="gastosimprevistos" class="form-label">Gastos Imprevistos</label>
+                <input type="number" class="form-control" id="gastosimprevistos" name="gastosimprevistos" min="0" required value="<%= pol.getGastosimprevistos()%>">
+            </div>
+            <div class="col-4">
+                <label for="totalpoliza" class="form-label">Total Poliza</label>
+                <input type="number" class="form-control" id="totalpoliza" name="totalpoliza" min="0" required value="<%= pol.getTotalpoliza()%>">
             </div>
            <div class="col-md-12">
                </br>

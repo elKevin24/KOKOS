@@ -65,6 +65,14 @@ public class Poliza {
                         + "`descripcion`,\n"
                         + "`total_prendas`,\n"
                         + "`prendas_dañadas`,\n"
+                        + "`pais`,\n"
+                        + "`impuestopoliza`,\n"
+                        + "`almacenaje`,\n"
+                        + "`gestoraduanero`,\n"
+                        + "`fleteaereo`,\n"
+                        + "`tramitador`,\n"
+                        + "`gastosimprevistos`,\n"
+                        + "`totalpoliza`,\n"
                         + "`usuario_id`)\n"
                         + "VALUES\n"
                         + "('" + poliza.getNumero_poliza() + "',\n"
@@ -72,6 +80,14 @@ public class Poliza {
                         + "'" + poliza.getDescripcion() + "',\n"
                         + "'" + poliza.getTotal_prendas() + "',\n"
                         + "'" + poliza.getPrendas_dañadas() + "',\n"
+                        + "'" + poliza.getPais()+ "',\n"
+                        + "'" + poliza.getImpuestopoliza()+ "',\n"
+                        + "'" + poliza.getAlmacenaje()+ "',\n"
+                        + "'" + poliza.getGestoraduanero()+ "',\n"
+                        + "'" + poliza.getFleteaereo()+ "',\n"
+                        + "'" + poliza.getTramitador()+ "',\n"
+                        + "'" + poliza.getGastosimprevistos()+ "',\n"
+                        + "'" + poliza.getTotalpoliza()+ "',\n"
                         + "'" + poliza.getUsuario_id() + "')";
 
                 st.execute(sql);
@@ -96,14 +112,26 @@ public class Poliza {
             try (Connection con = c.getConexion()) {
                 Statement st;
                 st = con.createStatement();
-                try (ResultSet rs = st.executeQuery("SELECT * FROM kokos.poliza where id_poliza = " + id + " ")) {
+                try (ResultSet rs = st.executeQuery("SELECT * FROM kokos.poliza where id_poliza = " + id + " and status = 1 ")) {
                     while (rs.next()) {
 
+                        user.setId_poliza(rs.getString("id_poliza"));
                         user.setNumero_poliza(rs.getString("numero_poliza"));
                         user.setReferencia(rs.getString("referencia"));
                         user.setDescripcion(rs.getString("descripcion"));
                         user.setTotal_prendas(rs.getString("total_prendas"));
                         user.setPrendas_dañadas(rs.getString("prendas_dañadas"));
+                        user.setPais(rs.getString("pais"));
+                        user.setImpuestopoliza(rs.getString("impuestopoliza"));
+                        user.setAlmacenaje(rs.getString("almacenaje"));
+                        user.setGestoraduanero(rs.getString("gestoraduanero"));
+                        user.setFleteaereo(rs.getString("fleteaereo"));
+                        user.setTramitador(rs.getString("tramitador"));
+                        user.setGastosimprevistos(rs.getString("gastosimprevistos"));
+                        user.setTotalpoliza(rs.getString("totalpoliza"));
+                        user.setFecha(rs.getString("fecha"));
+                        user.setUsuario_id(rs.getString("usuario_id"));
+                        
                     }
                 }
                 st.close();
@@ -157,7 +185,17 @@ String sql = null;
                         + "`referencia` = '" + poliza.getReferencia() + "',\n"
                         + "`descripcion` = '" + poliza.getDescripcion() + "',\n"
                         + "`total_prendas` = " + poliza.getTotal_prendas() + ",\n"
-                        + "`prendas_dañadas` = " + poliza.getPrendas_dañadas() + "\n"
+                        + "`prendas_dañadas` = " + poliza.getPrendas_dañadas() +",\n"
+                         
+                        + "`pais` = '" + poliza.getPais()+"',\n"
+                        + "`impuestopoliza` = " + poliza.getImpuestopoliza()+",\n"
+                        + "`almacenaje` = " + poliza.getAlmacenaje()+",\n"
+                        + "`gestoraduanero` = " + poliza.getGestoraduanero()+",\n"
+                        + "`fleteaereo` = " + poliza.getFleteaereo()+",\n"
+                        + "`tramitador` = " + poliza.getTramitador()+",\n"
+                        + "`gastosimprevistos` = " + poliza.getGastosimprevistos()+",\n"
+                        + "`totalpoliza` = " + poliza.getTotalpoliza()+"\n"
+                         
                         + "WHERE `id_poliza` = " + id + "";
 
                 st.execute(sql);

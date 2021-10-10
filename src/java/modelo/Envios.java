@@ -40,7 +40,7 @@ public class Envios {
 
     public static LinkedList<BeanEnvios> consultaEnvios() throws SQLException {
         LinkedList<BeanEnvios> inv = new LinkedList<>();
-        String sql = "SELECT A.id_envio, B.nombre, A.fecha, COUNT(C.id_envio ) PRENDAS\n"
+        String sql = "SELECT A.id_envio, B.nombre, A.fecha, sum(C.cantidad ) PRENDAS\n"
                 + "FROM kokos.envios A, kokos.tiendas B, kokos.detalles_envios C\n"
                 + "where A.tienda_id = B.id_tienda\n"
                 + "AND A.id_envio =  C.id_envio \n"
@@ -59,7 +59,6 @@ public class Envios {
                         user.setTienda_id(rs.getString(2));
                         user.setFecha(rs.getString(3));
                         user.setUsuario_id(rs.getString(4));
-                        
 
                         inv.add(user);
                     }
@@ -160,10 +159,12 @@ public class Envios {
                 sql = "INSERT INTO `kokos`.`detalles_envios`\n"
                         + "(`id_detalle`,\n"
                         + "`inventario_id`,\n"
+                        + "`cantidad`,\n"
                         + "`id_envio`)\n"
                         + "VALUES\n"
                         + "('" + inv.getId_detalle() + "',\n"
                         + "'" + inv.getInventario_id() + "',"
+                        + "'" + inv.getCantidad() + "',"
                         + "'" + id + "')";
 
                 st.execute(sql);
@@ -179,8 +180,8 @@ public class Envios {
         return agregado;
     }
 
-    public static BeanPoliza Consultar(String id) {
-        BeanPoliza user = new BeanPoliza();
+    public static BeanEnvios Consultar(String id) {
+        BeanEnvios user = new BeanEnvios();
         System.out.println("entrando a consultar");
 
         try {
@@ -188,14 +189,18 @@ public class Envios {
             try (Connection con = c.getConexion()) {
                 Statement st;
                 st = con.createStatement();
-                try (ResultSet rs = st.executeQuery("SELECT * FROM kokos.poliza where id_poliza = " + id + " ")) {
+                try (ResultSet rs = st.executeQuery("SELECT  a.id_envio, b.usuario, c.nombre, c.encargada, a.fecha\n"
+                        + "FROM kokos.envios a, kokos.usuarios b, kokos.tiendas c \n"
+                        + "where a.usuario_id = b.id_usuario\n"
+                        + "and a.tienda_id = c.id_tienda\n"
+                        + "and id_envio =" + id + "")) {
                     while (rs.next()) {
 
-                        user.setNumero_poliza(rs.getString("numero_poliza"));
-                        user.setReferencia(rs.getString("referencia"));
-                        user.setDescripcion(rs.getString("descripcion"));
-                        user.setTotal_prendas(rs.getString("total_prendas"));
-                        user.setPrendas_dañadas(rs.getString("prendas_dañadas"));
+                        user.setId_envio(rs.getString("id_envio"));
+                        user.setUsuario_id(rs.getString("usuario"));
+                        user.setTienda_id(rs.getString("nombre"));
+                        user.setFecha(rs.getString("fecha"));
+                        user.setStatus(rs.getString("encargada"));
                     }
                 }
                 st.close();

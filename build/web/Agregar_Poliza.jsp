@@ -31,24 +31,58 @@
         <form class="row g-3" action="ServletPoliza" method="post" autocomplete="off">
             <div class="col-md-6">
                 <label for="numero_poliza" class="form-label">Numero Poliza</label>
-                <input type="text" class="form-control" id="numero_poliza" name="numero_poliza">
+                <input type="text" class="form-control" id="numero_poliza" name="numero_poliza" required>
             </div>
             <div class="col-md-6">
                 <label for="referencia" class="form-label">Referencia</label>
-                <input type="text" class="form-control" id="referencia" name="referencia">
-            </div>
-            <div class="col-12">
-                <label for="descripcion" class="form-label">Descripcion</label>
-                <input type="text" class="form-control" id="descripcion" name="descripcion">
+                <input type="text" class="form-control" id="referencia" name="referencia" required>
             </div>
             <div class="col-md-6">
                 <label for="total_prendas" class="form-label">Total Prendas</label>
-                <input type="number" class="form-control" id="total_prendas" name="total_prendas">
+                <input type="number" class="form-control" id="total_prendas" name="total_prendas" required >
             </div>
             <div class="col-md-6">
                 <label for="prendas_danadas" class="form-label">Prendas Dañadas</label>
-                <input type="number" class="form-control" id="prendas_dañadas" name="prendas_danadas">
+                <input type="number" class="form-control" id="prendas_dañadas" name="prendas_danadas"  required>
             </div>
+            <div class="col-3">
+                <label for="Pais" class="form-label">Pais</label>
+                <input type="text" class="form-control" id="Pais" name="Pais" required>
+            </div>
+            <div class="col-9">
+                <label for="descripcion" class="form-label">Descripcion</label>
+                <input type="text" class="form-control" id="descripcion" name="descripcion" required>
+            </div>
+            
+            <div class="col-3">
+                <label for="impuestopoliza" class="form-label">Impuesto Poliza</label>
+                <input type="number" class="form-control" id="impuestopoliza" name="impuestopoliza" min="0" required>
+            </div>
+            <div class="col-3">
+                <label for="almacenaje" class="form-label">Almacenaje</label>
+                <input type="number" class="form-control" id="almacenaje" name="almacenaje" min="0" required>
+            </div>
+            <div class="col-3">
+                <label for="gestoraduanero" class="form-label">Gestor Aduanero</label>
+                <input type="number" class="form-control" id="gestoraduanero" name="gestoraduanero" min="0" required>
+            </div>
+            <div class="col-3">
+                <label for="fleteaereo" class="form-label">Flete Aereo</label>
+                <input type="number" class="form-control" id="fleteaereo" name="fleteaereo" min="0" required>
+            </div>
+            <div class="col-4">
+                <label for="tramitador" class="form-label">Tramitador</label>
+                <input type="number" class="form-control" id="tramitador" name="tramitador" min="0" required>
+            </div>
+            <div class="col-4">
+                <label for="gastosimprevistos" class="form-label">Gastos Imprevistos</label>
+                <input type="number" class="form-control" id="gastosimprevistos" name="gastosimprevistos" min="0" required>
+            </div>
+            <div class="col-4">
+                <label for="totalpoliza" class="form-label">Total Poliza</label>
+                <input type="number" class="form-control" id="totalpoliza" name="totalpoliza" min="0" required>
+            </div>
+            
             <div class="col-md-12">
                 </br>
             </div>

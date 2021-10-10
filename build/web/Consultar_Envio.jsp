@@ -62,7 +62,7 @@
                             out.println("<td id='prueba'>" + lista.get(i).getTienda_id() + "</td>");
                             out.println("<td id='prueba'>" + lista.get(i).getFecha() + "</td>");
                             out.println("<td id='prueba'>" + lista.get(i).getUsuario_id() + "</td>");
-                            out.println("<td>" + "<a class='btn btn-warning' href=Detalle_Envio.jsp?id=" + lista.get(i).getId_envio() + ">" + " Detalle" + "</a>" + "</td>");
+                            out.println("<td>" + "<a class='btn btn-warning' href=Ver_Envio.jsp?id=" + lista.get(i).getId_envio() + ">" + " Detalle" + "</a>" + "</td>");
                             // <input  type="hidden" value="1" name="param">
                             // out.println("<td> <a class='btn-floating btn-small waves-effect waves-light green'></a></td>");
                             out.println("</tr>");

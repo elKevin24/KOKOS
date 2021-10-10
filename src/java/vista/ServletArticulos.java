@@ -59,10 +59,10 @@ public class ServletArticulos extends HttpServlet {
         String Marca = request.getParameter("Marca");
         String precio_costo = request.getParameter("precio_costo");
         String precio_venta = request.getParameter("precio_venta");
-        String codigo = request.getParameter("codigo").toUpperCase();
+        String codigo = request.getParameter("codigo");
         String usuario = request.getParameter("usuario");
         String Numero_Prenda = request.getParameter("Numero_Prenda");
-        String descripcion = request.getParameter("descripcion").toUpperCase();
+        String descripcion = request.getParameter("descripcion");
         BeanInventario p;
         String pol;
 
@@ -75,7 +75,7 @@ public class ServletArticulos extends HttpServlet {
 
             out.println(param + Prenda + Talla + Marca + precio_costo + precio_venta + codigo + usuario);
 
-             p = new BeanInventario(Prenda,Marca, Talla,  precio_costo, precio_venta, codigo, usuario, Numero_Prenda, descripcion);
+             p = new BeanInventario(Prenda,Marca, Talla,  precio_costo, precio_venta, codigo.toUpperCase(), usuario, Numero_Prenda, descripcion.toUpperCase());
              pol = Inventario.agregar(p);
 
             if (pol.equalsIgnoreCase("bien")) {
@@ -103,7 +103,16 @@ public class ServletArticulos extends HttpServlet {
 
         }
         if (param.equalsIgnoreCase("3")) {
-            System.err.println("Borrar");
+            
+            boolean actualizado;
+            
+            String id = request.getParameter("id");
+            actualizado  = Inventario.Eliminar(id);
+            if(actualizado){
+                response.sendRedirect("Consultar_Inventario.jsp");
+            }else {
+                out.println("No se actualizo");
+            }
 
         }
 

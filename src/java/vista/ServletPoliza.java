@@ -60,6 +60,14 @@ public class ServletPoliza extends HttpServlet {
         String total_prendas;
         String prendas_danadas;
         String usuario;
+        String Pais;
+        String impuestopoliza;
+        String almacenaje;
+        String gestoraduanero;
+        String fleteaereo;
+        String tramitador;
+        String gastosimprevistos;
+        String totalpoliza;
 
         int key = 0;
         String param = request.getParameter("param");
@@ -78,10 +86,21 @@ public class ServletPoliza extends HttpServlet {
                 total_prendas = request.getParameter("total_prendas");
                 prendas_danadas = request.getParameter("prendas_danadas");
                 usuario = request.getParameter("usuario");
+                
+                Pais = request.getParameter("Pais");
+                impuestopoliza = request.getParameter("impuestopoliza");
+                almacenaje = request.getParameter("almacenaje");
+                gestoraduanero = request.getParameter("gestoraduanero");
+                fleteaereo = request.getParameter("fleteaereo");
+                tramitador = request.getParameter("tramitador");
+                gastosimprevistos = request.getParameter("gastosimprevistos");
+                totalpoliza = request.getParameter("totalpoliza");
+                
+                
 
                 out.println(param + "numero_poliza" + numero_poliza + referencia + descripcion + total_prendas + "prendas_danadas" + prendas_danadas + usuario);
 
-                BeanPoliza p = new BeanPoliza(numero_poliza, referencia, descripcion, total_prendas, prendas_danadas, usuario);
+                BeanPoliza p = new BeanPoliza(numero_poliza, referencia, descripcion, total_prendas, prendas_danadas, usuario, Pais, impuestopoliza, almacenaje, gestoraduanero, fleteaereo, tramitador, gastosimprevistos, totalpoliza);
                 String pol = Poliza.agregar(p);
 
                 if (pol.equalsIgnoreCase("bien")) {
@@ -102,13 +121,22 @@ public class ServletPoliza extends HttpServlet {
                 total_prendas = request.getParameter("total_prendas");
                 prendas_danadas = request.getParameter("prendas_danadas");
                 usuario = request.getParameter("usuario");
+                
+                Pais = request.getParameter("Pais");
+                impuestopoliza = request.getParameter("impuestopoliza");
+                almacenaje = request.getParameter("almacenaje");
+                gestoraduanero = request.getParameter("gestoraduanero");
+                fleteaereo = request.getParameter("fleteaereo");
+                tramitador = request.getParameter("tramitador");
+                gastosimprevistos = request.getParameter("gastosimprevistos");
+                totalpoliza = request.getParameter("totalpoliza");
 
-                BeanPoliza b = new BeanPoliza(numero_poliza, referencia, descripcion, total_prendas, prendas_danadas, usuario);
+                BeanPoliza b = new BeanPoliza(numero_poliza, referencia, descripcion, total_prendas, prendas_danadas, usuario, Pais, impuestopoliza, almacenaje, gestoraduanero, fleteaereo, tramitador, gastosimprevistos, totalpoliza);
                 String pol2 = Poliza.Editar(b, id_poliza_edit);
                 System.err.println(""+pol2);
                 if (pol2.equalsIgnoreCase("ok")) {
                     System.out.println("Se inserto");
-                    response.sendRedirect("Agregar_Poliza.jsp");
+                    response.sendRedirect("Consultar_Poliza.jsp");
 
                 } else {
                     System.err.println("No se insnerto");

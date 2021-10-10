@@ -10,6 +10,7 @@ import controlador.BeanEnvios;
 import controlador.BeanInventario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -61,61 +62,49 @@ public class ServletEnvios extends HttpServlet {
         //String cont = request.getParameter("cont");
         String Tienda = request.getParameter("Tienda");
 
-        
-       
-           
-            
+        // out.println( Usuario + Tienda);
+        BeanEnvios p = new BeanEnvios(Tienda, Usuario);
+        String pol = Envios.agregar(p);
 
-           // out.println( Usuario + Tienda);
+        if (pol.equalsIgnoreCase("bien")) {
+            if (request.getParameter("cont").isEmpty()) {
+                response.sendRedirect("Agregar_Poliza.jsp");
+            } else {
 
-            BeanEnvios p = new BeanEnvios(Tienda,Usuario);
-            String pol = Envios.agregar(p);
-
-            if (pol.equalsIgnoreCase("bien")) {
-                if(request.getParameter("cont").isEmpty()){
-                    response.sendRedirect("Agregar_Poliza.jsp");
-                }else{
-                    
-                    System.out.println("not is empty");
+                //System.out.println("not is empty");
                 int cont = Integer.valueOf(request.getParameter("cont"));
-                    System.err.println("cont"+cont);
+                //System.err.println("cont" + cont);
+                
+                
                 BeanDetalleEnvio det;
-                String[] detalle = new String[cont];
+                String[][] detalle = new String[cont][2];
                 for (int i = 0; i < detalle.length; i++) {
                     int a = i + 1;
-                    detalle[i] = request.getParameter("codigo_nav" + a + "");
-                    System.err.println("codigo "+request.getParameter("codigo_nav" + a + ""));
-                    
-                    
+                    detalle[i][0] = request.getParameter("codigo_nav" + a + "");
+                    detalle[i][1] = request.getParameter("Cantidad" + a + "");
+                    //System.err.println("codigo " + request.getParameter("codigo_nav" + a + ""));
+
                     //Aqui vas obteniendo el id del curso
                 }
-                
-                    
-                    
-                    for (String detalle1 : detalle) {
-                        System.err.println("detalle" + detalle1);
-                    }
-                boolean k = false;
 
+                for (String[] detalle1 : detalle) {
+                    System.err.println("detalle" + Arrays.toString(detalle1));
+                }
+                boolean k = false;
 
                 for (int i = 0; i < detalle.length; i++) {
 
-                    det = new BeanDetalleEnvio(i, detalle[i]);
+                    det = new BeanDetalleEnvio(i, detalle[i][0], detalle[i][1]);
                     k = Envios.agregarDetalle(det);
                 }
-                
-                 response.sendRedirect("Agregar_Envio.jsp");
-                    
-                }
-                
-                
 
-            } else {
-                System.err.println("No se inserto");
+                response.sendRedirect("Agregar_Envio.jsp");
+
             }
 
-        
-        
+        } else {
+            System.err.println("No se inserto");
+        }
 
     }
 

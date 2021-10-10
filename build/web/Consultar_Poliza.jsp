@@ -21,6 +21,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         </head>
         <body>
+            
             <div class="container">
                 <table id="example" border="1"   class="display table table-hover table-bordered table-striped table-responsive-sm" >
                     <thead>
@@ -34,6 +35,7 @@
                             <th>Prendas Dañadas</th>
                             <th>Fecha</th>
                             <th>Usuario</th>
+                            <th>Ver</th>
                             <th>Editar</th>
                             <th>Eliminar</th>
 
@@ -57,6 +59,7 @@
                             out.println("<td id='prueba'>" + lista.get(i).getPrendas_dañadas() + "</td>");
                             out.println("<td id='prueba'>" + lista.get(i).getFecha() + "</td>");
                             out.println("<td id='prueba'>" + lista.get(i).getUsuario_id() + "</td>");
+                            out.println("<td>" + "<a class='btn btn-primary' href=Ver_Poliza.jsp?id=" + lista.get(i).getId_poliza() + ">" + "Ver" + "</a>" + "</td>");
                             out.println("<td>" + "<a class='btn btn-warning' href=Editar_Poliza.jsp?id=" + lista.get(i).getId_poliza() + ">" + "Editar" + "</a>" + "</td>");
                             out.println("<td><form  method='post' action='ServletPoliza'><input  type='hidden' value='3' name='param'><input  type='hidden' value='" + lista.get(i).getId_poliza() + "' name='id'><button type='submit' class='btn btn-danger'>Eliminar</button></form></td>");
 
@@ -79,6 +82,7 @@
                         <th>Prendas Dañadas</th>
                         <th>Fecha</th>
                         <th>Usuario</th>
+                        <th>Ver</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
