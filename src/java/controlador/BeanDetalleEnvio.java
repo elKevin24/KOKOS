@@ -49,6 +49,48 @@ public class BeanDetalleEnvio {
     public void setCantidad(String cantidad) {
         this.cantidad = cantidad;
     }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getPrenda() {
+        return prenda;
+    }
+
+    public void setPrenda(String prenda) {
+        this.prenda = prenda;
+    }
+
+    public String getMarcas() {
+        return marcas;
+    }
+
+    public void setMarcas(String marcas) {
+        this.marcas = marcas;
+    }
+
+    public String getTalla() {
+        return talla;
+    }
+
+    public void setTalla(String talla) {
+        this.talla = talla;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
+    
     
 
     public BeanDetalleEnvio(int id_detalle, String inventario_id, String cantidad
@@ -68,6 +110,11 @@ public class BeanDetalleEnvio {
     private String status;
     private String id_envio;
     private String cantidad;
+    private String codigo;
+    private String prenda;
+    private String marcas;
+    private String talla;
+    private String descripcion;
 
     public BeanDetalleEnvio() {
     }

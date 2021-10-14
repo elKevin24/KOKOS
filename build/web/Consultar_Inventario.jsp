@@ -35,6 +35,14 @@
 
     </head>
     <body>
+        <div class="content-inner">
+    <!-- Page Header-->
+    <header class="page-header">
+        <div class="container-fluid">
+            
+            <button class="btn btn-primary">PDF</button>
+        </div>
+    </header>
         <div class="container">
             <table id="example" border="1"   class="display table table-hover table-bordered table-striped table-responsive table-sm" >
                 <thead>
@@ -51,6 +59,7 @@
                         <th>Usuario</th>
                         <th>Fecha Ingreso</th>
                         <th>Cantidad de Prenda</th>
+                        <th>Descripcion</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
 
@@ -80,8 +89,9 @@
                             out.println("<td id='prueba'>" + lista.get(i).getUsuario_id() + "</td>");
                             out.println("<td id='prueba'>" + lista.get(i).getFecha() + "</td>");
                             out.println("<td id='prueba'>" + lista.get(i).getNumero_Prenda() + "</td>");
-                            out.println("<td>" + "<a class='btn btn-warning' href=Editar_Articulo.jsp?id=" + lista.get(i).getId_inventario() + ">" + "Editar" + "</a>" + "</td>");
-                            out.println("<td><form  method='post' action='ServletArticulos'><input  type='hidden' value='3' name='param'><input  type='hidden' value='" + lista.get(i).getId_inventario() + "' name='id'><button type='submit' class='btn btn-danger'>Eliminar</button></form></td>");
+                            out.println("<td id='prueba'>" + lista.get(i).getDescripcion()+ "</td>");
+                            out.println("<td>" + "<a class='btn btn-warning btn-sm' href=Editar_Articulo.jsp?id=" + lista.get(i).getId_inventario() + ">" + "Editar" + "</a>" + "</td>");
+                            out.println("<td><form  method='post' action='ServletArticulos'><input  type='hidden' value='3' name='param'><input  type='hidden' value='" + lista.get(i).getId_inventario() + "' name='id'><button type='submit' class='btn btn-danger btn-sm'>Eliminar</button></form></td>");
 
                             // <input  type="hidden" value="1" name="param">
                             // out.println("<td> <a class='btn-floating btn-small waves-effect waves-light green'></a></td>");
@@ -103,7 +113,8 @@
                         <th>Precio Venta</th>
                         <th>Usuario</th>
                         <th>Fecha Ingreso</th>
-                        <th>Status</th>
+                        <th>Cantidad</th>
+                        <th>Descripcion</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>

@@ -4,6 +4,7 @@
     Author     : busqu
 --%>
 
+<%@page import="controlador.BeanDetalleEnvio"%>
 <%@page import="modelo.Envios"%>
 <%@page import="controlador.BeanEnvios"%>
 <%@page import="modelo.Usuario"%>
@@ -46,21 +47,28 @@
 
 </head>
 <body>
-
+<div class="content-inner">
+    <!-- Page Header-->
+    <header class="page-header">
+        <div class="container-fluid">
+            
+            <button class="btn btn-primary" onclick="tablepdf()">PDF</button>
+        </div>
+    </header>
 
 
     <div class="container">
-        
+
         <div class="table-responsive-lg">
             <div id="render_me">
                 <table id="customers" class="table table-bordered table-striped table-hover" class="text-center">
                     <thead class="text-center">
                         <tr>
                             <th>
-                                <img id="logo" src="img/logo.jpg" alt=""/>
+                                <img id="logo" width="100px" src="img/logo.jpg" alt=""/>
 
                             </th>
-                            <th colspan="7"  class="text-center">
+                            <th colspan="6"  class="text-center">
                                 <p>ENVIO KOKOS BOUTIQUE</p> 
 
                             </th>
@@ -69,7 +77,7 @@
 
                     <tbody>
                         <tr>
-                            <td colspan="2" class="text-center">
+                            <td  class="text-center">
                                 Numero de Envio: <%= pol.getId_envio()%>
                             </td>
                             <td colspan="4" class="text-center">
@@ -85,19 +93,52 @@
                             </th>
 
                         </tr>
-                       
+                        <tbody>
+                            <tr>
+                                <th>Numero</th>                                                     
+                                <th>Cantidad</th>
+                                <th>Codigo</th>
+                                <th>Prenda</th>
+                                <th>Marcas</th>
+                                <th>Talla</th>
+                                <th>Descripcion</th>                                
+                            </tr>
+                        
+                            <%
+
+                                LinkedList<BeanDetalleEnvio> lista = Envios.consultaEnviosDetalle(id);
+
+                                for (int i = 0; i < lista.size(); i++) {
+                                    
+                                    out.println("<td>" + i+ "</td>");
+                                    out.println("<td>" + lista.get(i).getCantidad()+ "</td>");
+                                    out.println("<td>" + lista.get(i).getCodigo()+ "</td>");
+                                    out.println("<td>" + lista.get(i).getPrenda()+ "</td>");
+                                    out.println("<td>" + lista.get(i).getMarcas()+ "</td>");
+                                    out.println("<td>" + lista.get(i).getTalla()+ "</td>");
+                                    out.println("<td>" + lista.get(i).getDescripcion()+ "</td>");
+                                    
+                                    out.println("</tr>");
+
+                                }
+
+                            %>  
+
+
+
+                        </tbody>
+                        
+
                 </table>              
             </div>
         </div>
+                            
     </div>
 
 </div>
 
 
-<button onclick="tablepdf()">
-    PDF
 
-</button>
 
 
 

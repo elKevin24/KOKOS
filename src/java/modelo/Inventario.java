@@ -13,7 +13,7 @@ public class Inventario {
 
     public static LinkedList<BeanInventario> consultaInventario() throws SQLException {
         LinkedList<BeanInventario> inv = new LinkedList<>();
-        String sql = "SELECT A.id_inventario, B.prenda, C.marcas, D.talla, A.precio_costo, A.precio_venta, A.codigo, E.usuario, A.fecha, A.status, A.cantidad, A.descripcion FROM \n"
+        String sql = "SELECT A.id_inventario, B.prenda, C.marcas, D.talla, A.precio_costo, A.precio_venta, A.codigo, E.usuario, A.fecha, A.status, A.cantidad_actual, A.descripcion FROM \n"
                 + "kokos.inventario A, kokos.prenda B, kokos.marcas C, kokos.tallas D, kokos.usuarios E\n"
                 + "where A.prenda = B.id_prenda\n"
                 + "AND  A.marca = C.id_marcas\n"
@@ -57,7 +57,7 @@ public class Inventario {
 
     public static LinkedList<BeanInventario> consultaInventario(String filtro) throws SQLException {
         LinkedList<BeanInventario> inv = new LinkedList<>();
-        String sql = "SELECT A.id_inventario, B.prenda, C.marcas, D.talla, A.precio_costo, A.precio_venta, A.codigo, A.cantidad, A.descripcion FROM \n"
+        String sql = "SELECT A.id_inventario, B.prenda, C.marcas, D.talla, A.precio_costo, A.precio_venta, A.codigo, A.cantidad_actual, A.descripcion FROM \n"
                 + "kokos.inventario A, kokos.prenda B, kokos.marcas C, kokos.tallas D, kokos.usuarios E\n"
                 + "where A.prenda = B.id_prenda\n"
                 + "AND A.marca = C.id_marcas\n"
@@ -118,6 +118,7 @@ public class Inventario {
                         + "`precio_venta`,\n"
                         + "`codigo`,\n"
                         + "`cantidad`,\n"
+                        + "`cantidad_actual`,\n"
                         + "`descripcion`,\n"
                         + "`usuario_id`)\n"
                         + "VALUES\n"
@@ -127,6 +128,7 @@ public class Inventario {
                         + "'" + inv.getPrecio_costo() + "',\n"
                         + "'" + inv.getPrecio_venta() + "',\n"
                         + "UPPER('" + inv.getCodigo() + "'),\n"
+                        + "'" + inv.getNumero_Prenda() + "',\n"
                         + "'" + inv.getNumero_Prenda() + "',\n"
                         + "UPPER('" + inv.getDescripcion() + "'),\n"
                         + "'" + inv.getUsuario_id() + "')";

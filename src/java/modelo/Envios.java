@@ -72,47 +72,47 @@ public class Envios {
 
         return inv;
     }
-//
-//    public static LinkedList<BeanEnvios> consultaInventario(String filtro) throws SQLException {
-//        LinkedList<BeanEnvios> inv = new LinkedList<>();
-//        String sql = "SELECT A.id_inventario, B.prenda, C.marcas, D.talla, A.precio_costo, A.precio_venta, A.codigo FROM \n"
-//                + "kokos.inventario A, kokos.prenda B, kokos.marcas C, kokos.tallas D, kokos.usuarios E\n"
-//                + "where A.prenda = B.id_prenda\n"
-//                + "AND A.marca = C.id_marcas\n"
-//                + "and A.talla = D.id_talla\n"
-//                + "AND A.usuario_id = E.id_usuario\n"
-//                + "AND CONCAT(A.codigo , C.marcas) LIKE  '%" + filtro + "%'";
-//
-//        //String sql = "SELECT CODIGO, NOMBRE FROM FINANCIERO.ASFT_USUARIOS_DE_SERVICIOS WHERE CO_TDU_CODIGO = 1 AND CODIGO||' '||NOMBRE  LIKE '%" + filtro + "%' ";
-//        try {
-//            Conexion c = new Conexion();
-//            try (Connection con = c.getConexion()) {
-//                Statement st;
-//                st = con.createStatement();
-//
-//                try (ResultSet rs = st.executeQuery(sql)) {
-//                    while (rs.next()) {
-//                        BeanEnvios user = new BeanEnvios();
-//                        user.setId_inventario(rs.getString(1));
-//                        user.setPrenda(rs.getString(2));
-//                        user.setMarca(rs.getString(3));
-//                        user.setTalla(rs.getString(4));
-//                        user.setPrecio_costo(rs.getString(5));
-//                        user.setPrecio_venta(rs.getString(6));
-//                        user.setCodigo(rs.getString(7));
-//
-//                        inv.add(user);
-//                    }
-//                }
-//                st.close();
-//            }
-//        } catch (SQLException e) {
-//
-//            System.err.println("consultar" + e);
-//        }
-//
-//        return inv;
-//    }
+
+    public static LinkedList<BeanDetalleEnvio> consultaEnviosDetalle(String id) throws SQLException {
+        LinkedList<BeanDetalleEnvio> inv = new LinkedList<>();
+        String sql = "SELECT \n"
+                + "det.cantidad, inv.codigo, pren.prenda, m.marcas, talla.talla, inv.descripcion\n"
+                + "FROM \n"
+                + "kokos.detalles_envios det, kokos.inventario inv, kokos.prenda pren, kokos.marcas m, kokos.tallas talla\n"
+                + "where det.inventario_id = inv.id_inventario\n"
+                + "and inv.prenda = pren.id_prenda\n"
+                + "and inv.marca = m.id_marcas\n"
+                + "and inv.talla = talla.id_talla\n"
+                + "and det.id_envio = " + id + "";
+
+        try {
+            Conexion c = new Conexion();
+            try (Connection con = c.getConexion()) {
+                Statement st;
+                st = con.createStatement();
+
+                try (ResultSet rs = st.executeQuery(sql)) {
+                    while (rs.next()) {
+                        BeanDetalleEnvio user = new BeanDetalleEnvio();
+                        user.setCantidad(rs.getString("cantidad"));
+                        user.setCodigo(rs.getString("codigo"));
+                        user.setPrenda(rs.getString("prenda"));
+                        user.setMarcas(rs.getString("marcas"));
+                        user.setTalla(rs.getString("talla"));
+                        user.setDescripcion(rs.getString("descripcion"));
+
+                        inv.add(user);
+                    }
+                }
+                st.close();
+            }
+        } catch (SQLException e) {
+
+            System.err.println("consultar" + e);
+        }
+
+        return inv;
+    }
 
     public static String agregar(BeanEnvios inv) {
         String agregado = null;

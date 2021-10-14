@@ -45,8 +45,10 @@ public class personaDAO implements Validar {
             }else{
                 return 0;
             }
-        }catch (SQLException e){     
+        }catch (SQLException e){   
+            System.out.println("modelo.personaDAO.Validar()"+e);
             return 0;
+            
         }
     }
     
