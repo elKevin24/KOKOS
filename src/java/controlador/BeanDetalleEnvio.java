@@ -89,6 +89,16 @@ public class BeanDetalleEnvio {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    public String getPrecio_venta() {
+        return precio_venta;
+    }
+
+    public void setPrecio_venta(String precio_venta) {
+        this.precio_venta = precio_venta;
+    }
+    
+    
     
     
     
@@ -115,6 +125,7 @@ public class BeanDetalleEnvio {
     private String marcas;
     private String talla;
     private String descripcion;
+    private String precio_venta;
 
     public BeanDetalleEnvio() {
     }

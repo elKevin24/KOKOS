@@ -98,6 +98,7 @@
                                 <th>Numero</th>                                                     
                                 <th>Cantidad</th>
                                 <th>Codigo</th>
+                                <th>Precio Venta</th>
                                 <th>Prenda</th>
                                 <th>Marcas</th>
                                 <th>Talla</th>
@@ -113,6 +114,7 @@
                                     out.println("<td>" + i+ "</td>");
                                     out.println("<td>" + lista.get(i).getCantidad()+ "</td>");
                                     out.println("<td>" + lista.get(i).getCodigo()+ "</td>");
+                                    out.println("<td>" + lista.get(i).getPrecio_venta()+ "</td>");
                                     out.println("<td>" + lista.get(i).getPrenda()+ "</td>");
                                     out.println("<td>" + lista.get(i).getMarcas()+ "</td>");
                                     out.println("<td>" + lista.get(i).getTalla()+ "</td>");

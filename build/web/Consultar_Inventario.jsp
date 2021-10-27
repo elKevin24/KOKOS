@@ -51,6 +51,7 @@
                         <th>No.</th>
 
                         <th>Codigo</th>
+                        
                         <th>Prenda</th>
                         <th>Marca</th>
                         <th>Talla</th>

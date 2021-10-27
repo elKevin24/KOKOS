@@ -76,7 +76,7 @@ public class Envios {
     public static LinkedList<BeanDetalleEnvio> consultaEnviosDetalle(String id) throws SQLException {
         LinkedList<BeanDetalleEnvio> inv = new LinkedList<>();
         String sql = "SELECT \n"
-                + "det.cantidad, inv.codigo, pren.prenda, m.marcas, talla.talla, inv.descripcion\n"
+                + "det.cantidad, inv.codigo, pren.prenda, m.marcas, talla.talla, inv.descripcion, inv.precio_venta\n"
                 + "FROM \n"
                 + "kokos.detalles_envios det, kokos.inventario inv, kokos.prenda pren, kokos.marcas m, kokos.tallas talla\n"
                 + "where det.inventario_id = inv.id_inventario\n"
@@ -95,6 +95,7 @@ public class Envios {
                     while (rs.next()) {
                         BeanDetalleEnvio user = new BeanDetalleEnvio();
                         user.setCantidad(rs.getString("cantidad"));
+                        user.setPrecio_venta(rs.getString("precio_venta"));
                         user.setCodigo(rs.getString("codigo"));
                         user.setPrenda(rs.getString("prenda"));
                         user.setMarcas(rs.getString("marcas"));

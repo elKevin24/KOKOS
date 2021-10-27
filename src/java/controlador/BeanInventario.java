@@ -127,6 +127,7 @@ public class BeanInventario {
     private String status;
     private String Numero_Prenda;
     private String descripcion;
+    
 
     public BeanInventario() {
     }
