@@ -3,11 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/busqu/Documents/NetBeansProjects/KOKOS/src/java/controlador/BeanInventario.java</file>
-            <file>file:/C:/Users/busqu/Documents/NetBeansProjects/KOKOS/src/java/modelo/Inventario.java</file>
-            <file>file:/C:/Users/busqu/Documents/NetBeansProjects/KOKOS/web/Consultar_Poliza.jsp</file>
-            <file>file:/C:/Users/busqu/Documents/NetBeansProjects/KOKOS/web/Ver_Envio.jsp</file>
-            <file>file:/C:/Users/busqu/Documents/NetBeansProjects/KOKOS/web/Consultar_Inventario.jsp</file>
+            <file>file:/C:/Users/busqu/Documents/NetBeansProjects/KOKOS/web/Agregar_Envio.jsp</file>
         </group>
     </open-files>
 </project-private>

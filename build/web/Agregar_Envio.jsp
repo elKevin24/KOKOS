@@ -46,7 +46,7 @@
             <div class="col-md-4">
                 <label for="Tienda" class="form-label">Seleccione Tienda</label>
                 <select class="form-select" aria-label="Default select example" id="Tienda" name="Tienda" required>
-                    <option selected>Seleccionar Tienda</option>
+                    <option value="">Seleccionar Tienda</option>
 
 
                     <%                    LinkedList<BeanTienda> lista = Tienda.consulta_tienda();
@@ -119,14 +119,13 @@
         function agregarFila() {
             a++;
             document.getElementById("tablaprueba").insertRow(-1).innerHTML = `<td>
-                    <input type="text" id="CODIGO` + a + `" class="form-control" placeholder="CODIGO PRENDA" aria-label="CODIGO PRENDA"   onkeyup="buscar_nav(this.value,this.id)" aria-describedby="addon-wrapping" name="CODIGO` + a + `">
-                                            <input type="hidden" id="codigo_nav` + a + `" name="codigo_nav` + a + `">
-                                            <div id="busca_nav_resultado` + a + `" class="z"></div></div></td>
-
-    <td id="Cantidad Prenda` + a + `"><input type="number" id="Cantidad` + a + `" class="form-control" placeholder="Cantidad Prendas" aria-label="Cantidad Prendas"  aria-describedby="addon-wrapping" name="Cantidad` + a + `" min="1"></td>
-    <td id="Prenda` + a + `"></td>
-    <td id="Marca` + a + `"></td>
-    <td id="Talla` + a + `"></td>`;
+                <input type="text" id="CODIGO` + a + `" class="form-control" placeholder="CODIGO PRENDA" aria-label="CODIGO PRENDA"   onkeyup="buscar_nav(this.value,this.id)" aria-describedby="addon-wrapping" name="CODIGO` + a + `" required>
+                <input type="hidden" id="codigo_nav` + a + `" name="codigo_nav` + a + `">
+                <div id="busca_nav_resultado` + a + `" class="z"></div></div></td>
+                <td id="Cantidad Prenda` + a + `"><input type="number" id="Cantidad` + a + `" class="form-control" placeholder="Cantidad Prendas" aria-label="Cantidad Prendas"  aria-describedby="addon-wrapping" name="Cantidad` + a + `" min="1" required></td>
+                <td id="Prenda` + a + `"></td>
+                <td id="Marca` + a + `"></td>
+                <td id="Talla` + a + `"></td>`;
             document.getElementById("cont").value = a;
 
 
